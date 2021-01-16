@@ -10,12 +10,9 @@ import streamlit as st
 
 '# Movie Recommender'
 "Here's the [GitHub](https://github.com/jacKlinc/movie_recommender) repo"
-'Type your favourite'
 
 ### Type favourite
-fav = st.text_input("Type movie...")
-
-'Click Recommend to find a new movie'
+fav = st.text_input("Type a movie and hit Enter...")
 
 ### Load model  
 learn = load_learner('./data/mdl_movie-recommend.pkl')
@@ -41,9 +38,12 @@ movie_factors = learn.model.movie_factors
 idxs = dls.classes['title'].o2i[fav]
 # Finds distances from chosen title
 distances = nn.CosineSimilarity(dim=1)(movie_factors, movie_factors[idxs][None])
-idx = distances.argsort(descending=True)[1]
+# gets top 4
+idx = distances.argsort(descending=True)[1:4]
+
 
 # Recommend
-if st.button('Recommend'):
-    'You like: ', fav
-    'You should watch: ', dls.classes['title'][idx]
+if fav:
+    '### You like: '
+    fav
+    '### You should watch: ', [dls.classes['title'][i] for i in idx]
