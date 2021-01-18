@@ -10,7 +10,7 @@ import streamlit as st
 
 '# Movie Recommender'
 "Here's the [GitHub](https://github.com/jacKlinc/movie_recommender) repo"
-'Type a movie with the year in brackets after. The movie you type might not be here'
+'Type a movie with the year in brackets after, e.g. Titanic (1997). The movie you type might not be here'
 
 # Type favourite
 fav = st.text_input("Type a movie and hit Enter...")
@@ -33,7 +33,14 @@ ratings = ratings.merge(movies)
 # Add to DataLoaders object
 dls = CollabDataLoaders.from_df(ratings, item_name='title', bs=64)
 
+# If movie is entered
 if fav:
+    # TODO find movie in set and pass movie name and year to next condition
+    # fav
+    # st.write(ratings.title.str.contains(fav))
+    # ratings.title.str.contains(fav).index[0]
+
+    # If the movie is not in the dataset
     if len(ratings[ratings.title == fav]) == 0:
         "Can't find your movie, try another"
     else:
