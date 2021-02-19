@@ -52,3 +52,14 @@ if fav:
         '### You should watch: '
         for i in idx:
             dls.classes['title'][i]
+
+'# Movie Review Sentiment Analysis'
+"Here's the [GitHub](https://github.com/jacKlinc/movie_review_sentiment) repo"
+"Type a review of your favourite and this will tell you if it's negative or postive"
+
+# Type favourite
+rev = st.text_input("Type a review and hit Enter...")
+
+if rev:
+    "### Your review"
+    rev
